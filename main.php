@@ -66,6 +66,7 @@ function render_rows() {
             </thead>
             <?php render_rows(); ?>
         </table>
+        <span class="help-block">Note: Use [myproduct] for shortcode</span>
     </div>
 </div>
 
