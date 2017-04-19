@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name: My Products
   Plugin URI: http://www.mrabdelrahman10.com
@@ -13,14 +12,26 @@
  * Including main plugin's file
  */
 function my_products_admin() {
+    include('inc.php');
     include('main.php');
+}
+
+/**
+ * Including form plugin's file to add and edit
+ */
+function myproducts_add() {
+    include('inc.php');
+    include('myproducts_add.php');
 }
 
 /**
  * Adding "My Products" to menu
  */
 function my_products_admin_actions() {
-    add_menu_page("My Products Display", "My Products", 1, "My Products Display", "my_products_admin");
+    add_menu_page("My Products Display", "My Products", 1, "my_products", "my_products_admin");
+
+    //this is a submenu
+    add_submenu_page('my_products', 'Add New Product', 'Add New', 'manage_options', 'myproducts_add', 'myproducts_add');
 }
 
 add_action('admin_menu', 'my_products_admin_actions');
@@ -70,3 +81,38 @@ function uninstall_plugin_database_table() {
 
 register_uninstall_hook(__FILE__, 'uninstall_plugin_database_table');
 
+/**
+ * ShortCode to render all products
+ * @global string $table_prefix
+ * @global string $wpdb
+ */
+function render_myproduct_shortcode() {
+    global $table_prefix, $wpdb;
+    $sql = "SELECT * FROM {$table_prefix}my_product Order By id DESC";
+    $rows = $wpdb->get_results($sql) or die(mysql_error());
+    ?>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Sku</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($rows as $row) {
+        ?>
+            <tr>
+                <td><?php echo $row->id; ?></td>
+                <td><?php echo $row->title; ?></td>
+                <td><?php echo $row->sku; ?></td>
+            </tr>
+        <?php
+    }
+    ?>
+    </tbody>
+    </table>
+    <?php
+}
+add_shortcode('myproduct', 'render_myproduct_shortcode');

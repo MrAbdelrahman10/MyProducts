@@ -1,0 +1,20 @@
+/*
+    Created on : Apr 19, 2017, 3:32:30 PM
+    Author     : Abdelrahman
+*/
+
+#my_products{
+    margin-top: 50px;
+}
+
+.my_data{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.my_data:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
