@@ -1,7 +1,7 @@
 # MyProducts
 ======================
 
-My Products Wordpress plugin
+"My Products" is Wordpress Plugin for displaying products from an OSCommerce shopping cart
 
 Install
 =======
